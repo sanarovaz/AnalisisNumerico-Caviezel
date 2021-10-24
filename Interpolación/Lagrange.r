@@ -1,16 +1,4 @@
-lagrange <- function(x, v, f) {
-    lenv = length(v)
-    op   <- 0
-
-    for (i in 1:lenv){
-        w   <- v[-i]
-        h   <- prod(x-w) / prod(v[i]-w)
-        op  <- op + f(v[i]) * h
-    }
-  op
-}
-
-lagrangetab <- function(x, xs = NULL, ys = NULL, df = NULL, scan = FALSE, as_df = FALSE) {
+lagrange <- function(x, xs = NULL, ys = NULL, df = NULL, scan = FALSE, as_df = FALSE) {
 
     if (scan){
         print("Defina preimágenes en orden de tabla.")
@@ -55,4 +43,6 @@ xs = c(1910, 1930, 1950, 1970, 1990)
 ys = c(125320, 133420, 117183, 120323, 145311)
 df2 = data.frame(xs,ys)
 
-lagrangetab(1978, df2) - lagrangetab(1964, df2)
+lagrange(1978, xs,ys) - lagrange(1964, xs,ys)
+
+lagrange(1978, df2) - lagrange(1964, df2)
