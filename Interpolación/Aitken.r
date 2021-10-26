@@ -16,7 +16,7 @@ op
 xs = c(0.1, 0.35, 0.58, 0.8)
 ys = 57^xs
 
-aitken(0.5, xs, ys) - 57^0.5
+aitken(0.5, xs, ys)
 
 xt = c(56.6, 56.85, 57.08, 57.3)
 yt = sqrt(xt)

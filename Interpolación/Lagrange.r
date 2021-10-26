@@ -39,10 +39,7 @@ lagrange <- function(x, xs = NULL, ys = NULL, df = NULL, scan = FALSE, as_df = F
   op
 }
  
-xs = c(1910, 1930, 1950, 1970, 1990)
-ys = c(125320, 133420, 117183, 120323, 145311)
-df2 = data.frame(xs,ys)
+xs = c(0.1, 0.35, 0.58, 0.8)
+ys = 57^xs
 
-lagrange(1978, xs,ys) - lagrange(1964, xs,ys)
-
-lagrange(1978, df2) - lagrange(1964, df2)
+lagrange(0.5, xs, ys)
