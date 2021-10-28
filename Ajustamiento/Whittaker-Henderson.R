@@ -10,7 +10,7 @@ f <- function(n,z){
   ks = c()
   s = n-z
   
-  for (j in seq(1:s)){
+  for (j in 1:s){
     k_j = c(rep(0, j-1), k_i, rep(0, s-j))
     ks = append(ks,k_j)
   }
@@ -48,9 +48,4 @@ f_x = c(0.072, 0.069, 0.084, 0.089, 0.118, 0.105, 0.122)
 w_x <- whittakerhenderson(z, h, xs, n_x, f_x)
 
 w_x
-plot(xs, f_x,
-     main = 'Ajustamiento por Whittaker-Henderson',
-     xlab = 'x',
-     ylab = 'f(x)')
-lines(xs, w_x,
-      col = 'red')
+
