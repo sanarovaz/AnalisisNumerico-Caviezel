@@ -44,8 +44,12 @@ xs = seq(75,81)
 n_x = c(134, 101, 136, 129, 110, 99, 109)
 f_x = c(0.072, 0.069, 0.084, 0.089, 0.118, 0.105, 0.122)
 
-
 w_x <- whittakerhenderson(z, h, xs, n_x, f_x)
 
 w_x
-
+plot(xs, f_x,
+     main = 'Ajustamiento por Whittaker-Henderson',
+     xlab = 'x',
+     ylab = 'f(x)')
+lines(xs, w_x,
+      col = 'red')
