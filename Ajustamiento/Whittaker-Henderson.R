@@ -86,7 +86,7 @@ points(x, w_t, pch = 19, col = 'red', cex = 1)
 
 points(x, u, lwd = 3, pch = 4)
 
-legend(0.75,33, 
+legend(0.95,90, 
    legend = c("u(x)", "v(x)"), 
    pch = c(4, -2), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'red'))
 }
