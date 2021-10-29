@@ -59,8 +59,8 @@ whittakerhenderson(z,h,x,w,u, wdado = TRUE)
 # Función que permite encontrar el vector de ponderadores w, dados los valores observados (U) y ajustados (V),
 # además de los coeficientes z y h.
 
-whittakerhenderson.getw <- function(z,h,x,U,V){
-  n = length(x)
+whittakerhenderson.getw <- function(z,h,U,V){
+  n = length(U)
   K = f(n,z)
   A = h * t(K) %*% K %*% V
   B = U-V
@@ -69,7 +69,7 @@ whittakerhenderson.getw <- function(z,h,x,U,V){
 }
 
 
-j <- whittakerhenderson.getw(z,h,x,u,v)
+j <- whittakerhenderson.getw(z,h,u,v)
 whittakerhenderson(z,h,x,j,u, wdado = TRUE)
 
 
@@ -91,6 +91,3 @@ legend(0.75,33,
    legend = c("u(x)", "v(x)"), 
    pch = c(4, -2), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'red'))
 }
-
-
-
