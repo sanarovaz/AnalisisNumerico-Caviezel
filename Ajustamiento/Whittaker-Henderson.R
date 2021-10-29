@@ -88,5 +88,5 @@ points(x, u, lwd = 3, pch = 4)
 
 legend(0.95,90, 
    legend = c("u(x)", "v(x)"), 
-   pch = c(4, -2), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'red'))
+   pch = c(4, 19), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'red'))
 }
