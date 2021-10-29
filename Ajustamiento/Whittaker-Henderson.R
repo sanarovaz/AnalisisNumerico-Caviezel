@@ -20,23 +20,22 @@ K
 }
 
 
-# Función de Ajustamiento por Whittaker-Henderson. Toma como argumentos el grado del polinomio (z),
-# la ponderación de la regularidad en relación a la fidelidad (h), el vector de preimágenes (xs),
-# el vector de tamaños de muestra correspondientes a cada preimagen (w), y el vector de imágenes (f_x).
-# El booleano w sirve para aclarar cuando se provee directamente un vector w con las ponderaciones de los
-# argumentos. En ese caso se considera que el vector w es el vector que contiene dichas ponderaciones.
-# La función devuelve un vector vertical que contiene la imagen ajustada correspondiente a las 
-# preimágenes determinadas.
+# Función de Ajustamiento por Whittaker-Henderson. Toma como argumentos el grado de regularidad (z),
+# la ponderación de la regularidad en relación a la fidelidad (h), el vector de tamaños de muestra
+# correspondientes a cada preimagen (w), y el vector de imágenes observadas (U).
+# El booleano wdado sirve para aclarar cuando se provee directamente un vector wdado con las ponderaciones
+# de los argumentos. En ese caso se considera que el vector w es el vector que contiene dichas ponderaciones.
+# La función devuelve un vector que contiene la imagen ajustada correspondiente a las preimágenes determinadas.
 
-whittakerhenderson <- function(z, h, x, w, U, wdado = FALSE){
+whittakerhenderson <- function(z, h, w, U, wdado = FALSE){
   
-  if (wdado == TRUE){
+  if (wdado){
     w_x = w
   } else {
     w_x = w / mean(w)  
   }
   
-  n = length(x)
+  n = length(U)
   K = f(n, z)
   W = diag(n) * w_x
   C = W + h * (t(K) %*% K)
@@ -52,7 +51,7 @@ w = c(1, 4, 1, 1)
 v = c(17, 75, 87, 18)
 
 
-whittakerhenderson(z,h,x,w,u, wdado = TRUE)
+whittakerhenderson(z,h,w,u, wdado = TRUE)
 
 
 
@@ -70,12 +69,12 @@ whittakerhenderson.getw <- function(z,h,U,V){
 
 
 j <- whittakerhenderson.getw(z,h,u,v)
-whittakerhenderson(z,h,x,j,u, wdado = TRUE)
+whittakerhenderson(z,h,j,u, wdado = TRUE)
 
 
 
 # Plot
-{w_t <- whittakerhenderson(z,h,x,w,u)
+{w_t <- whittakerhenderson(z,h,w,u)
 
 plot(x, u,
  main = paste0('Ajustamiento por Whittaker-Henderson (h = ', h,', z = ', z, ')' ),
