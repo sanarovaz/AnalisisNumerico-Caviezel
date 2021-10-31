@@ -1,5 +1,4 @@
 mco.exp <- function(x, w){
-  xs = c()
   vm = c()
   for (i in 1:2){
     for (j in 1:2){
@@ -35,5 +34,10 @@ b <- v[2]
 g <- function(x){b * exp(a*x)}
 uv = g(x)
 
-plot(x,u, pch = 19, ylim = c(0,225))
+plot(x,u, pch = 19,
+     main = paste0('Ajustamiento MCO (a = ', round(a,4),', b = ', round(b,4), ')' ),
+     xlab = 'x', ylab = 'f(x)')
 lines(x, uv, lty = 2, col = 'blue', lwd = 2)
+legend(x = 'topleft',
+       legend = c("u(x)", paste0('v(x) = ', round(b,4), 'e^(', round(a,4), 'x)')), 
+       pch = c(4, 19), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'blue'))
