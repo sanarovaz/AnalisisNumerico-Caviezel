@@ -20,6 +20,8 @@ K
 }
 
 
+# -----------------------------------------------------------------------
+
 # Función de Ajustamiento por Whittaker-Henderson. Toma como argumentos el grado de regularidad (z),
 # la ponderación de la regularidad en relación a la fidelidad (h), el vector de tamaños de muestra
 # correspondientes a cada preimagen (w), y el vector de imágenes observadas (U).
@@ -43,17 +45,17 @@ whittakerhenderson <- function(z, h, w, U, wdado = FALSE){
   V
 }
 
-z = 1
-h = 0.25
-x = 1:4
-u = c(9.75, 77.3, 91.05, 14.55)
-w = c(1, 4, 1, 1)
-v = c(17, 75, 87, 18)
-
+z = 3
+h = 1
+x = seq(16,22,2)
+u = c(20.3, 21.4, 20.8, 22.1)
+w = c(1,1,1,0.2)
 
 whittakerhenderson(z,h,w,u, wdado = TRUE)
 
 
+
+# -----------------------------------------------------------------------
 
 # Función que permite encontrar el vector de ponderadores w, dados los valores observados (U) y ajustados (V),
 # además de los coeficientes z y h.
@@ -67,10 +69,13 @@ whittakerhenderson.getw <- function(z,h,U,V){
   as.vector(W)
 }
 
-
+v = c(17, 75, 87, 18)
 j <- whittakerhenderson.getw(z,h,u,v)
 whittakerhenderson(z,h,j,u, wdado = TRUE)
 
+
+
+# -----------------------------------------------------------------------
 
 
 # Plot
@@ -90,3 +95,39 @@ legend(0.95,90,
    legend = c("u(x)", "v(x)"), 
    pch = c(4, 19), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'red'))
 }
+
+
+
+
+# -----------------------------------------------------------------------
+ 
+
+
+
+ 
+# v = c(0.36514488, 0.3888905, 0.42236926, 0.4600605)
+# U = c(0.36618, 0.38475, 0.42858, 0.45592)
+# k = f(4,3)
+# w = diag(4) * 4:1
+# M = t(v-U) %*% w %*% (v-U)
+# M
+# 
+# kv = k %*% v
+# kv %*% t(kv)
+# 
+# Cish = (t(k) %*% k) %*% v
+# 
+# 
+# 
+# ((w %*% U) - (w %*% v)) / Cish
+ 
+
+
+
+
+
+
+
+
+
+

@@ -23,7 +23,3 @@ difftable <- function(x, y, n = length(x) - 1){
   }
   df
 }
-
-xt = seq(1,11,2)
-yt = c(8.1, 28, 43.5, 62, 76.3, 96.2)
-View(difftable(xt,yt))

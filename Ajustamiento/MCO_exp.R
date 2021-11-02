@@ -39,5 +39,5 @@ plot(x,u, pch = 19,
      xlab = 'x', ylab = 'f(x)')
 lines(x, uv, lty = 2, col = 'blue', lwd = 2)
 legend(x = 'topleft',
-       legend = c("u(x)", paste0('v(x) = ', round(b,4), 'e^(', round(a,4), 'x)')), 
+       legend = c("u(x)", paste0('v(x) = ', round(b,4), ' e^(', round(a,4), 'x)')), 
        pch = c(4, 19), lwd = c(-1,2), lty = c(0, 2), col = c('black', 'blue'))
