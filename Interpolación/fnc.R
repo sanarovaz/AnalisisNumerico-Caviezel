@@ -42,6 +42,7 @@ fnc <- function(a,b,dfn1,dfn2){
   yt2 = dfn2(xt)
   maxy = max(c(max(yt), max(yt2)))
   miny = min(c(min(yt), min(yt2)))
+  dfn1c = dfn1(c)
   
   plot(xt,yt,pch = -2,
        ylim = c(miny, maxy),
@@ -54,8 +55,10 @@ fnc <- function(a,b,dfn1,dfn2){
            legend = c('f^(n+1) (x)', 'f^(n+2) (x)'), 
            lwd = c(2,2), lty = c(1, 2), col = c('red','black'))  
   
-  cat(paste0('\nEN EXTREMOS:\nf(', a, ') = ', dfn1(a), '\nf(', b, ') = ', dfn1(b), 
-             '\n\nEVALUACIÓN DE C:\nSe escogió c = ', c, '\nf^(n+1) (c) = ', dfn1(c), '\n\n'))
+  cat(paste0('\nANÁLISIS DE FUNCIÓN:\nf(', a, ') = ', dfn1(a), '\nf(', b, ') = ', dfn1(b),
+             '\nMínimo en [', a, ', ', b, ']: ', min(yt),
+             '\nMáximo en [', a, ', ', b, ']: ', max(yt),
+             '\n\nEVALUACIÓN DE C:\nSe escogió c = ', c, '\nf^(n+1) (c) = ', dfn1c, '\n\n'))
   
 }
 

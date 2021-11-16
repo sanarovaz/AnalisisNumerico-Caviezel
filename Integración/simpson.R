@@ -28,13 +28,16 @@ simpson <- function(f, a, b, n){
   
   aprox = (h/3) * (sum(fb) + 4 * sum(funeven) + 2 * sum(feven))
   
-  t = -(h^5 * n)/90
-  cat("\nMÉTODO DE SIMPSON\n")
-  cat(paste0('\nLa aproximación es\n\n', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(4) (c)\n'))
-  cat(paste0('= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(4) (c)\n\n'))
+  t = -(h^5 * (n/2))/90
   
+  {cat(paste0("\nMÉTODO DE SIMPSON\n",
+             '\nIntegral definida entre ', a, ' y ', b , '\n',
+             'h = ', h, '    n = ', n,'\n\n',
+             '(h/3) * [f(bordes) + 4 * f(impares) + 2 * f(pares)] - (h^5 /90) * (n/2) * f^(2) (c) =\n',
+             '= ', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c) =\n',
+             '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))}
   
-  r = (b-a)*0.1
+  {r = (b-a)*0.1
   xt = seq(from = a-r, to = b+r, r*0.05)
   yt = f(xt)
 
@@ -52,10 +55,11 @@ simpson <- function(f, a, b, n){
     col = "#fdae6b"
   )
   lines(xt, rep(0,length(xt)))
-  lines(xt,yt, lwd = 2,lty = 2) 
-  
+  lines(xt,yt, lwd = 2,lty = 2)}
+
 }
 
 
-simpson(function(x) -cos(x/8),
-         4, 6, 2)
+simpson(function(x) -cos(6*x),
+          4, 5, 2)
+

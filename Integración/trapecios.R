@@ -15,11 +15,14 @@ trapecios <- function(f, a, b, n){
   
   t = (-h^3 / 12) * n
   
-  cat("\nMÉTODO DE TRAPECIOS\n")
-  cat(paste0('\nLa aproximación es\n\n', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c)\n'))
-  cat(paste0('= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))
+  {cat(paste0("\nMÉTODO DE TRAPECIOS\n",
+               '\nIntegral definida entre ', a, ' y ', b , '\n',
+                'h = ', h, '    n = ', n,'\n\n',
+               '(h/2) * [f(bordes) + 2 * f(internos)] - (h^3 /12) * n * f^(2) (c) =\n',
+               '= ', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c) =\n',
+               '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))}
   
-  r = (b-a)*0.1
+  {r = (b-a)*0.1
   xt = seq(from = a-r, to = b+r, r*0.05)
   yt = f(xt)
 
@@ -37,8 +40,8 @@ trapecios <- function(f, a, b, n){
     col = "#fdae6b"
   )
   lines(xt, rep(0,length(xt)))
-  lines(xt,yt, lwd = 2,lty = 2) 
+  lines(xt,yt, lwd = 2,lty = 2)} 
 }
 
 trapecios(function(x) -cos(6*x),
-         4, 5, 1)
+         4, 5, 2)
