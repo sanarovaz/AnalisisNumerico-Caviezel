@@ -36,6 +36,8 @@ simpson <- function(f, a, b, n){
     fmin = f2c$fmin
     fmax = f2c$fmax
     sdf2 = f2c$dfn1
+    error_extremes = sort(c(t*fmin, t*fmax))
+    integral_extremes = sort(c(aprox + t*fmin, aprox + t*fmax))
      
     eq = paste0("\n\n                        MÉTODO DE SIMPSON\n",
                 'Integral definida entre ', a, ' y ', b , '\n',
@@ -48,8 +50,8 @@ simpson <- function(f, a, b, n){
                 'Se escogió c = ', c, '\n',
                 'f^(4) (c) = ', fc, '\n',
                 'Cota del error: ', abs(t*fc), '\n',
-                'Extremos del error: [', (t*fmin), ', ', (t*fmax), ']\n',
-                'Intervalo de integral: [', aprox + t*fmin, ', ', aprox + t*fmax, ']\n\n'
+                'Extremos del error: [', error_extremes[1], ', ', error_extremes[2], ']\n',
+                'Intervalo de integral: [', integral_extremes[1], ', ', integral_extremes[2], ']\n\n'
     )}
   
   {r = (b-a)*0.1
