@@ -60,11 +60,6 @@ fnc <- function(a,b,dfn1,dfn2){
 }
 
 
-dfn1 <- function(x){
-  -cos(x)
-}
-dfn2 <- function(x){
-  sin(x)
-}
-
-fnc(0, pi, dfn1, dfn2)
+fnc(0, pi,
+    function(x) -cos(x),
+    function(x) sin(x))

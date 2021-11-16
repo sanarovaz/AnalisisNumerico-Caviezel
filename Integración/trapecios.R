@@ -1,6 +1,7 @@
 library(MASS)
+library(rootSolve)
 
-trapecio <- function(f, a, b, n){
+trapecios <- function(f, a, b, n){
   xs = seq(a, b, length.out = n+1)
   h = xs[2] - xs[1]
   
@@ -15,22 +16,29 @@ trapecio <- function(f, a, b, n){
   t = (-h^3 / 12) * n
   
   cat("\nMÉTODO DE TRAPECIOS\n")
-  cat(paste0('\nLa aproximación es\n\n', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(4) (c)\n'))
+  cat(paste0('\nLa aproximación es\n\n', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c)\n'))
   cat(paste0('= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))
   
   r = (b-a)*0.1
   xt = seq(from = a-r, to = b+r, r*0.05)
   yt = f(xt)
-  
+
+  if (length(uniroot.all(f, c(a,b))) == 0){
+    if (f(a + r) > 0) {lims = c(0, max(yt))}
+    else {lims = c(min(yt), 0)}
+  } else {lims = c(min(yt), max(yt))}  
+    
   plot(xt,yt,pch = -2,
-       xlab = 'x', ylab = 'f(x)')
+       xlab = 'x', ylab = 'f(x)',
+       ylim = lims)
   polygon(
     c(xt[xt >= a & xt <= b], b, a),
     c(yt[xt >= a & xt <= b], 0, 0),
     col = "#fdae6b"
   )
+  lines(xt, rep(0,length(xt)))
   lines(xt,yt, lwd = 2,lty = 2) 
 }
 
-trapecio(function(x) x^5,
-         0, 1, 1)
+trapecios(function(x) -cos(6*x),
+         4, 5, 1)
