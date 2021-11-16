@@ -1,8 +1,10 @@
 library(MASS)
+library(Deriv)
 library(rootSolve)
 
 trapecios <- function(f, a, b, n){
-  xs = seq(a, b, length.out = n+1)
+  
+  {xs = seq(a, b, length.out = n+1)
   h = xs[2] - xs[1]
   
   br = c(xs[1], tail(xs, 1))
@@ -13,14 +15,29 @@ trapecios <- function(f, a, b, n){
   
   aprox = (h/2) * (sum(f(br)) + 2 * sum(fr))
   
-  t = (-h^3 / 12) * n
+  t = (-h^3 / 12) * n}
   
-  {cat(paste0("\nMÉTODO DE TRAPECIOS\n",
-               '\nIntegral definida entre ', a, ' y ', b , '\n',
+  {f2c = fnc(f = f, a = a, b = b, n = 1, print = FALSE, plot = FALSE)
+     c = f2c$c
+     fc = f2c$fc
+     fmin = f2c$fmin
+     fmax = f2c$fmax
+     sdf2 = f2c$dfn1
+    
+   eq = paste0("\n\n                        MÉTODO DE TRAPECIOS\n",
+               'Integral definida entre ', a, ' y ', b , '\n',
                 'h = ', h, '    n = ', n,'\n\n',
                '(h/2) * [f(bordes) + 2 * f(internos)] - (h^3 /12) * n * f^(2) (c) =\n',
                '= ', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c) =\n',
-               '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))}
+               '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n\n',
+               '\nANÁLISIS DEL ERROR\n',
+               'f^(2) (x) = ', sdf2, '\n\n',
+               'Se escogió c = ', c, '\n',
+               'f^(2) (c) = ', fc, '\n',
+               'Cota del error: ', abs(t*fc), '\n',
+               'Extremos del error: [', (t*fmin), ', ', (t*fmax), ']\n',
+               'Intervalo de integral: [', aprox + t*fmin, ', ', aprox + t*fmax, ']\n\n'
+               )}
   
   {r = (b-a)*0.1
   xt = seq(from = a-r, to = b+r, r*0.05)
@@ -40,8 +57,21 @@ trapecios <- function(f, a, b, n){
     col = "#fdae6b"
   )
   lines(xt, rep(0,length(xt)))
-  lines(xt,yt, lwd = 2,lty = 2)} 
+  lines(xt,yt, lwd = 2,lty = 2)}
+  
+  invisible(data.frame(eq, aprox, t, h, fc, fmin, fmax))
 }
 
-trapecios(function(x) -cos(6*x),
-         4, 5, 2)
+
+cat(trapecios(function(x) 1 / (x-3)^(1/2),4, 10, 3)$eq)
+cat(trapecios(function(x) sin(x),pi/3, pi, 4)$eq)
+cat(trapecios(function(x) log(x),1, 2.5, 2)$eq)
+
+cat(simpson(function(x) (x-3)^(-1/2), 4, 10, 4)$eq)
+cat(simpson(function(x) sin(x),pi/3, pi, 4)$eq)
+cat(simpson(function(x) log(x),1, 2.5,2)$eq)
+
+cat(trapecios(function(x) exp(-x/2),
+              6, 12, 2)$eq)
+cat(simpson(function(x) exp(-x/2),
+              6, 12, 3)$eq)

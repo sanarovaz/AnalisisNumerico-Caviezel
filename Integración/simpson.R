@@ -1,8 +1,10 @@
 library(MASS)
+library(Deriv)
 library(rootSolve)
 
 simpson <- function(f, a, b, n){
-  x = seq(a, b, length.out = n+1)
+  
+  {x = seq(a, b, length.out = n+1)
   h = x[2] - x[1]
   xb = c(x[1], tail(x, 1))
   xi = x[-length(x)][-1]
@@ -13,29 +15,42 @@ simpson <- function(f, a, b, n){
     evenx = NULL
   } else if (n == 2) {
     unevenx = x[2]
-    evenx = 0
+    funeven = f(unevenx)
+    feven = 0
   } else {
       unevenx = xi[seq(1, lxi, by = 2)]
       evenx   = xi[-seq(1, lxi, by = 2)]
+      feven   = f(evenx)
+      funeven = f(unevenx)
   } 
   
-  
   fb = f(xb)
-  if (length(evenx) == 0){feven = 0}
-    else {feven = f(evenx)}
-  if (length(unevenx) == 0){funeven = 0}
-    else{funeven = f(unevenx)}
   
   aprox = (h/3) * (sum(fb) + 4 * sum(funeven) + 2 * sum(feven))
   
-  t = -(h^5 * (n/2))/90
+  t = -(h^5 * (n/2))/90}
   
-  {cat(paste0("\nMÉTODO DE SIMPSON\n",
-             '\nIntegral definida entre ', a, ' y ', b , '\n',
-             'h = ', h, '    n = ', n,'\n\n',
-             '(h/3) * [f(bordes) + 4 * f(impares) + 2 * f(pares)] - (h^5 /90) * (n/2) * f^(2) (c) =\n',
-             '= ', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c) =\n',
-             '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n'))}
+  {f2c = fnc(f = f, a = a, b = b, n = 3, print = FALSE, plot = FALSE)
+    c = f2c$c
+    fc = f2c$fc
+    fmin = f2c$fmin
+    fmax = f2c$fmax
+    sdf2 = f2c$dfn1
+     
+    eq = paste0("\n\n                        MÉTODO DE SIMPSON\n",
+                'Integral definida entre ', a, ' y ', b , '\n',
+                'h = ', h, '    n = ', n,'\n\n',
+                '(h/2) * [f(bordes) + 2 * f(internos)] - (h^3 /12) * n * f^(2) (c) =\n',
+                '= ', round(aprox, 8), ' - ', abs(round(t, 6)), ' * f^(2) (c) =\n',
+                '= ', fractions(aprox), ' - ', fractions(abs(t)), ' * f^(2) (c)\n\n\n',
+                '\nANÁLISIS DEL ERROR\n',
+                'f^(4) (x) = ', sdf2, '\n\n',
+                'Se escogió c = ', c, '\n',
+                'f^(4) (c) = ', fc, '\n',
+                'Cota del error: ', abs(t*fc), '\n',
+                'Extremos del error: [', (t*fmin), ', ', (t*fmax), ']\n',
+                'Intervalo de integral: [', aprox + t*fmin, ', ', aprox + t*fmax, ']\n\n'
+    )}
   
   {r = (b-a)*0.1
   xt = seq(from = a-r, to = b+r, r*0.05)
@@ -57,9 +72,10 @@ simpson <- function(f, a, b, n){
   lines(xt, rep(0,length(xt)))
   lines(xt,yt, lwd = 2,lty = 2)}
 
+  invisible(data.frame(eq, aprox, t, h))
 }
 
 
-simpson(function(x) -cos(6*x),
-          4, 5, 2)
-
+cat(simpson(
+    function(x) cos(x),
+    0, pi/4, 2)$eq)

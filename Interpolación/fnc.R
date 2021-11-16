@@ -5,7 +5,7 @@ library(rootSolve)
 # interpolación, además de especificar el valor de la función en ese punto.
 
 
-fnc <- function(a,b,dfn1,dfn2){
+fnc <- function(a,b,dfn1,dfn2, output = TRUE){
   
   roots <- uniroot.all(dfn2, c(a, b))
   
@@ -36,13 +36,12 @@ fnc <- function(a,b,dfn1,dfn2){
     }
   }
   
-  r = (b-a)*0.025
+  {r = (b-a)*0.025
   xt = seq(a-r, b+r, 0.001)
   yt = dfn1(xt)
   yt2 = dfn2(xt)
   maxy = max(c(max(yt), max(yt2)))
   miny = min(c(min(yt), min(yt2)))
-  dfn1c = dfn1(c)
   
   plot(xt,yt,pch = -2,
        ylim = c(miny, maxy),
@@ -53,13 +52,23 @@ fnc <- function(a,b,dfn1,dfn2){
     lines(rep(c, 1000), seq(-5,5, length.out = 1000))
     legend(x = 'topleft',
            legend = c('f^(n+1) (x)', 'f^(n+2) (x)'), 
-           lwd = c(2,2), lty = c(1, 2), col = c('red','black'))  
+           lwd = c(2,2), lty = c(1, 2), col = c('red','black'))}  
   
-  cat(paste0('\nANÁLISIS DE FUNCIÓN:\nf(', a, ') = ', dfn1(a), '\nf(', b, ') = ', dfn1(b),
-             '\nMínimo en [', a, ', ', b, ']: ', min(yt),
-             '\nMáximo en [', a, ', ', b, ']: ', max(yt),
-             '\n\nEVALUACIÓN DE C:\nSe escogió c = ', c, '\nf^(n+1) (c) = ', dfn1c, '\n\n'))
-  
+  if (output == TRUE){
+    cat(paste0('\nANÁLISIS DE FUNCIÓN:\nf(', a, ') = ', dfn1(a), '\nf(', b, ') = ', dfn1(b),
+               '\nMínimo en [', a, ', ', b, ']: ', min(yt),
+               '\nMáximo en [', a, ', ', b, ']: ', max(yt),
+               '\n\nEVALUACIÓN DE C:\nSe escogió c = ', c, '\nf^(n+1) (c) = ', dfn1(c), '\n\n'))
+    }
+
+  {invisible(data.frame(fa = dfn1(a),
+                       fb = dfn1(b),
+                       fc = dfn1(c), 
+                       min = min(yt), 
+                       max = max(yt), 
+                       roots = uniroot.all(dfn2, c(a,b)),
+                       c))}
+    
 }
 
 
