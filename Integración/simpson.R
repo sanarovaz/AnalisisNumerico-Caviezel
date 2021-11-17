@@ -74,10 +74,18 @@ simpson <- function(f, a, b, n){
   lines(xt, rep(0,length(xt)))
   lines(xt,yt, lwd = 2,lty = 2)}
 
-  invisible(data.frame(eq, aprox, t, h))
+  {invisible(data.frame(eq, aprox, t, h,
+                       minerror = error_extremes[1],
+                       maxerror = error_extremes[2],
+                       minintegral = integral_extremes[1],
+                       maxintegral = integral_extremes[2]
+                       ))}
 }
 
 
-cat(simpson(
-    function(x) cos(x),
-    0, pi/4, 2)$eq)
+cat(simpson(function(x) (x-3)^(-1/2),
+            4, 10, 4)$eq)
+cat(simpson(function(x) sin(x),
+            pi/3, pi, 4)$eq)
+cat(simpson(function(x) log(x),
+            1, 2.5,2)$eq)
