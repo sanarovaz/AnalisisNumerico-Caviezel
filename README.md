@@ -4,4 +4,6 @@ La carpeta **Interpolación** incluye algunos de los métodos numéricos de inte
 
 La carpeta **Ajustamiento** incluye tres algoritmos de méotodo de ajuste por Mínimos Cuadrados para tres modelos de v(x): a * x^b, a * *e*^b y polinomio de grado n. Además, Whittaker-Henderson.r incluye una función de ajuste por dicho procedimiento.
 
-La carpeta **Integración** contiene algoritmos correspondientes a los métodos generalizados de trapecios y Simpson, ambos requiriendo del algoritmo fnc que permite obtener los valores máximos de una derivada n-ésima en un intervalo.
+La carpeta **Sumación** contiene el script correspondiente a la fórmula de Woolhouse para calcular sumatorias.
+
+La carpeta **Integración** contiene algoritmos correspondientes a los métodos generalizados de trapecios, Simpson, Euler-McLaurin y Laplace, todos requiriendo del algoritmo fnc que permite obtener los valores máximos de una derivada n-ésima en un intervalo.
