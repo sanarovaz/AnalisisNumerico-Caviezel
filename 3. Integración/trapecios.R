@@ -61,7 +61,7 @@ trapecios <- function(f, a, b, n){
   lines(xt, rep(0,length(xt)))
   lines(xt,yt, lwd = 2,lty = 2)}
   
-  {invisible(data.frame(eq, aprox, t, h, fc, fmin, fmax,
+  {invisible(data.frame(eq, aprox, t, h, fc, fmin, fmax,c,
                        minerror = error_extremes[1],
                        maxerror = error_extremes[2],
                        minintegral = integral_extremes[1],
@@ -72,7 +72,7 @@ trapecios <- function(f, a, b, n){
 
 cat(trapecios(function(x) 1 / (x-3)^(1/2),
               4, 10, 3)$eq)
-cat(trapecios(function(x) sin(x),
+cat(trapecios(function(x) abs(cos(x)),
               pi/3, pi, 4)$eq)
 cat(trapecios(function(x) log(x),
               1, 2.5, 2)$eq)

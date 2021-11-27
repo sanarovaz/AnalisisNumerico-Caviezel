@@ -6,7 +6,6 @@ library(rootSolve)
 # y la derivada de orden n+2 de f(x) (dfn2). Devuelve el valor c a tomar para f^(n+1) (c) en el cálculo del error absoluto de
 # interpolación, además de especificar el valor de la función en ese punto.
 
-
 fnc <- function(f,a,b,n, print = TRUE, plot = TRUE){
   
   {dfn1 = Deriv(f, "x", nderiv = n + 1)
@@ -105,5 +104,5 @@ fnc <- function(f,a,b,n, print = TRUE, plot = TRUE){
 }
 
 
-x <- fnc(f = function(x) x^4,
-    a = 0, b = 4, n = 1)
+x <- fnc(f = function(x) (x+4)^-1,
+    a = 0, b = 2, n = 3)
