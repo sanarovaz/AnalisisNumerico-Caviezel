@@ -86,11 +86,3 @@ simpson <- function(f, a, b, n){
 
 cat(simpson(function(x) (x-3)^(-1/2),
             4, 10, 4)$eq)
-cat(simpson(function(x) sin(x),
-            pi/3, pi, 4)$eq)
-cat(simpson(function(x) log(x),
-            1, 2.5,2)$eq)
-
-
-cat(simpson(function(x) x^4-3*x^3+10,
-            1, 5, 4)$eq)
